@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import LoginWithGoogle from "../../components/LoginWithGoogle";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
   //   console.log(createUser);
+  const navigate = useNavigate()
   const { register, handleSubmit } = useForm();
   const handleRegister = (data) => {
     createUser(data.email, data.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user)
+        // console.log(user)
 
         const userInfo = {
             displayName: data.name
@@ -57,13 +60,26 @@ const Register = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success:", result);
+
+        getUserToken(email)
+        // console.log("Success:", result);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
     // console.log(userInfo);
   };
+
+  const getUserToken = email =>{
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+    .then(res => res.json())
+    .then(result => {
+        if(result.accessToken){
+            localStorage.setItem('accessToken', result.accessToken)
+            navigate('/')
+        }
+    })
+  }
   return (
     <div className=" w-96 mx-auto my-10 font-semibold text-purple-900 shadow-xl flex justify-center items-center rounded-lg">
       <div className=" ">
@@ -120,6 +136,16 @@ const Register = () => {
             />
           </div>
         </form>
+        <div className=" mb-3">
+          <p>
+            Have phone mela account?{" "}
+            <Link to="/login" className=" font-bold text-blue-700">
+              Login here!
+            </Link>
+          </p>
+          <div className="divider">OR</div>
+          <LoginWithGoogle></LoginWithGoogle>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const Header = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+
+  const handleLogout = ()=>{
+    logoutUser()
+    .then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+  // console.log(user);
   const navItems = (
     <>
       <li>
-        <a>Item 1</a>
+        <Link to="/">Home</Link>
       </li>
       <li tabIndex={0}>
         <a className="justify-between">
@@ -29,9 +41,13 @@ const Header = () => {
           </li>
         </ul>
       </li>
-      <li>
-        <a>Item 3</a>
-      </li>
+      {user?.email ? (
+        <>
+          
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
   return (
@@ -61,13 +77,30 @@ const Header = () => {
             {navItems}
           </ul>
         </div>
-        <Link to='/' className="btn btn-ghost normal-case text-2xl italic">Mobile Mela</Link>
+        <Link to="/" className="btn btn-ghost normal-case text-2xl italic">
+          Mobile Mela
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        {/* <a className="btn">Get started</a> */}
+        {user?.email ? (
+          <>
+          <div className="avatar placeholder">
+            <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+              <span>{user.displayName.slice(0,1)}</span>
+            </div>
+          </div>
+          <li>
+            <Link onClick={handleLogout}>Logout</Link>
+          </li>
+          </>
+        ) : 
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        }
       </div>
     </div>
   );
