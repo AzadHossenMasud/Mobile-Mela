@@ -3,6 +3,7 @@ import Main from "../../layout/Main";
 import AddPhone from "../../pages/Dashboard/AddPhone/AddPhone";
 import Dashboard from "../../pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../pages/Dashboard/MyOrders/MyOrders";
+import MyPhones from "../../pages/Dashboard/MyPhones/MyPhones";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
@@ -38,7 +39,11 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/addphone',
           element: <AddPhone></AddPhone>
-        }
+        },
+        {
+          path: '/dashboard/myphones',
+          element: <MyPhones></MyPhones>
+        },
       ]
   },
   ]);

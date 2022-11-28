@@ -19,13 +19,13 @@ const Dashboard = () => {
       }).then((res) => res.json()),
   });
 
-//   console.log(saveUser);
+  console.log(saveUser);
   return (
     <div>
       <Header></Header>
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content ">
+        <div className="drawer-content m-3">
           <Outlet></Outlet>
         </div>
 
@@ -41,7 +41,7 @@ const Dashboard = () => {
                   <Link to="/dashboard/addphone">Add Phone</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/myproducts">My Phones</Link>
+                  <Link to="/dashboard/myphones">My Phones</Link>
                 </li>
               </>
             )}
