@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginWithGoogle from "../../components/LoginWithGoogle";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
   //   console.log(createUser);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const { register, handleSubmit } = useForm();
   const handleRegister = (data) => {
     // console.log(data)
@@ -33,6 +38,7 @@ const Login = () => {
       .then((result) => {
         if (result.accessToken) {
           localStorage.setItem("accessToken", result.accessToken);
+          navigate(from, { replace: true });
         }
       });
   };

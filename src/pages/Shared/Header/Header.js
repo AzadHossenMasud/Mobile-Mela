@@ -1,18 +1,22 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const Header = () => {
   const { user, logoutUser } = useContext(AuthContext);
+  const firstLetter = user?.displayName.slice(0, 1);
 
-  const handleLogout = ()=>{
+ 
+  const handleLogout = () => {
     logoutUser()
-    .then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   // console.log(user);
   const navItems = (
     <>
@@ -41,12 +45,13 @@ const Header = () => {
           </li>
         </ul>
       </li>
-      {user?.email ? (
+      
+      {user?.email &&(
         <>
-          
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
         </>
-      ) : (
-        <></>
       )}
     </>
   );
@@ -87,20 +92,29 @@ const Header = () => {
       <div className="navbar-end">
         {user?.email ? (
           <>
-          <div className="avatar placeholder">
-            <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-              <span>{user.displayName.slice(0,1)}</span>
+            <div className="avatar placeholder ">
+              <div
+                className="bg-neutral-focus text-neutral-content rounded-full w-12 tooltip"
+                data-tip={user?.displayName}
+              >
+                <span>{firstLetter}</span>
+              </div>
             </div>
-          </div>
-          <li>
-            <Link onClick={handleLogout}>Logout</Link>
-          </li>
+            <li>
+              <Link onClick={handleLogout}>Logout</Link>
+            </li>
           </>
-        ) : 
+        ) : (
           <li>
             <Link to="/login">Login</Link>
           </li>
-        }
+        )}
+        <label
+          htmlFor="my-drawer-2"
+          className="btn bg-transparent drawer-button lg:hidden"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </label>
       </div>
     </div>
   );
