@@ -8,7 +8,7 @@ const PhoneModal = ({ modalItem, setModalitem }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const handleRegister = (data) => {
-    console.log(data);
+    // console.log(data);
     setModalitem('')
     toast.success('You successfully booked the phone')
   };

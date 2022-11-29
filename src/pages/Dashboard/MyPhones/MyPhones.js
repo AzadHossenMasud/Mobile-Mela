@@ -68,7 +68,7 @@ const MyPhones = () => {
         </div>
       ) : (
         <div className=" flex justify-center items-center">
-          <button className="btn btn-square loading"></button>
+          No phone found!
         </div>
       )}
     </div>
