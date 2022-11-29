@@ -23,20 +23,21 @@ const Header = () => {
         <Link to="/">Home</Link>
       </li>
       <li className="dropdown dropdown-bottom">
-        <label tabIndex={0}>
-            Click
-          </label>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu p-2 shadow bg-purple-700 rounded-box w-52"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
-          </ul>
+        <label tabIndex={0}>Catagory</label>
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu p-2 shadow bg-purple-700 rounded-box w-52"
+        >
+          <li>
+            <Link to="/catagory/01">FlagShip</Link>
+          </li>
+          <li>
+            <Link to="/catagory/02">Mid Budget</Link>
+          </li>
+          <li>
+            <Link to="/catagory/03">Low Budget</Link>
+          </li>
+        </ul>
       </li>
 
       {user?.email && (

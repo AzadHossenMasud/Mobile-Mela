@@ -19,7 +19,7 @@ const Dashboard = () => {
       }).then((res) => res.json()),
   });
 
-  console.log(saveUser);
+  // console.log(saveUser);
   return (
     <div>
       <Header></Header>

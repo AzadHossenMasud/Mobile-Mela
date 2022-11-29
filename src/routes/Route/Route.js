@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
+import Catagories from "../../pages/Catagories/Catagories";
 import AddPhone from "../../pages/Dashboard/AddPhone/AddPhone";
 import Dashboard from "../../pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../pages/Dashboard/MyOrders/MyOrders";
@@ -25,6 +26,13 @@ export const router = createBrowserRouter([
         {
             path: '/login',
             element: <Login></Login>
+        },
+        {
+            path: '/catagory/:id',
+            element: <PrivateRoute><Catagories></Catagories></PrivateRoute>,
+            loader: async ({ params }) => {
+              return fetch(`http://localhost:5000/catagories/${params.id}`);
+            },
         },
       ]
     },
