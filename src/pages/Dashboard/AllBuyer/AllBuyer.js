@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import { getAuth } from "firebase/auth";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const AllBuyer = () => {
-  const url = "http://localhost:5000/allbuyer";
+  const {delUser} = useContext(AuthContext)
+  const url = "https://phone-mela-server.vercel.app/allbuyer";
   const { data: allBuyer = [] } = useQuery({
     queryKey: ["allBuyer"],
     queryFn: async () =>
@@ -15,29 +18,40 @@ const AllBuyer = () => {
   });
 
 
-  const handleDelete = (id) => {
-    console.log(id);
-    fetch(`http://localhost:5000/allseller/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
+  const handleDelete = (id, uid) => {
+    console.log(id, uid);
+    getAuth()
+    .deleteUser(uid)
+    .then(() => {
+      console.log('Successfully deleted user');
+
+      fetch(`https://phone-mela-server.vercel.app/buyer/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((deleteresult) => {
+          console.log(deleteresult);
+          // if(updateresult.modifiedCount){
+          //     toast.success('Seller verified successfully')
+          // }
+        });
+
     })
-      .then((res) => res.json())
-      .then((deleteresult) => {
-        console.log(deleteresult);
-        // if(updateresult.modifiedCount){
-        //     toast.success('Seller verified successfully')
-        // }
-      });
+    .catch((error) => {
+      console.log('Error deleting user:', error);
+    });
+    
   };
-  console.log(allBuyer);
+  // console.log(allBuyer);
   return (
     <div>
       {allBuyer.length ? (
         <div className=" my-5 w-full mx-auto">
           <h2 className=" text-2xl font-semibold text-purple-900">
-            Total Seller : {allBuyer.length}
+            Total Buyer : {allBuyer.length}
           </h2>
           <div className="overflow-x-auto">
             <table className="table w-full text-purple-900">
@@ -56,7 +70,7 @@ const AllBuyer = () => {
                     <td>{buyer.name}</td>
                     <td>{buyer.email}</td>
                     
-                    <td onClick={() => handleDelete(buyer._id)}>
+                    <td onClick={() => handleDelete(buyer._id, buyer.uId)}>
                       {" "}
                       <button className=" font-semibold btn btn-sm bg-purple-800">
                         X

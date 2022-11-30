@@ -8,7 +8,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
 
   const queryClient = useQueryClient();
-  const url = `http://localhost:5000/users?email=${user?.email}`;
+  const url = `https://phone-mela-server.vercel.app/users?email=${user?.email}`;
   const { data: saveUser = [] } = useQuery({
     queryKey: ["saveUser"],
     queryFn: async () =>
@@ -42,6 +42,9 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <Link to="/dashboard/myphones">My Phones</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/mybuyers">My Buyers</Link>
                 </li>
               </>
             )}

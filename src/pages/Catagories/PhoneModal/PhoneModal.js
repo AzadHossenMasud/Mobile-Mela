@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const PhoneModal = ({ modalItem, setModalitem }) => {
   // console.log(modalItem);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
   const { register, handleSubmit } = useForm();
   const handleRegister = (data) => {
 
@@ -16,6 +18,7 @@ const PhoneModal = ({ modalItem, setModalitem }) => {
       buyerLocation: data.buyerlocation,
       image: modalItem.image,
       sellerName: modalItem.sellerName,
+      sellerEmail: modalItem.sellerEmail,
       sellerNumber: modalItem.sellerNumber,
       price: modalItem.price,
       phoneId : modalItem._id,
@@ -23,7 +26,7 @@ const PhoneModal = ({ modalItem, setModalitem }) => {
 
     }
 
-    fetch("http://localhost:5000/bookingphone", {
+    fetch("https://phone-mela-server.vercel.app/bookingphone", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -33,12 +36,13 @@ const PhoneModal = ({ modalItem, setModalitem }) => {
     })
       .then((response) => response.json())
       .then( result => {
-        console.log(result)
+        // console.log(result)
         if(result.acknowledged){
           toast.success('You successfully booked the phone')
 
+        navigate('/dashboard')
         }
-        console.log(result)
+        // console.log(result)
       })
     // console.log(bookPhone);
     setModalitem('')

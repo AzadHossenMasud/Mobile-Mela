@@ -6,6 +6,7 @@ import AddPhone from "../../pages/Dashboard/AddPhone/AddPhone";
 import AllBuyer from "../../pages/Dashboard/AllBuyer/AllBuyer";
 import AllSeller from "../../pages/Dashboard/AllSeller/AllSeller";
 import Dashboard from "../../pages/Dashboard/Dashboard/Dashboard";
+import MyBuyers from "../../pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../../pages/Dashboard/MyOrders/MyOrders";
 import MyPhones from "../../pages/Dashboard/MyPhones/MyPhones";
 import Home from "../../pages/Home/Home/Home";
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
             path: '/catagory/:id',
             element: <PrivateRoute><Catagories></Catagories></PrivateRoute>,
             loader: async ({ params }) => {
-              return fetch(`http://localhost:5000/catagories/${params.id}`);
+              return fetch(`https://phone-mela-server.vercel.app/catagories/${params.id}`);
             },
         },
       ]
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/allbuyer',
           element: <AllBuyer></AllBuyer>
+        },
+        {
+          path: '/dashboard/mybuyers',
+          element: <MyBuyers></MyBuyers>
         },
       ]
   },

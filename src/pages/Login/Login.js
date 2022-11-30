@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   const getUserToken = (email) => {
-    fetch(`http://localhost:5000/jwt?email=${email}`)
+    fetch(`https://phone-mela-server.vercel.app/jwt?email=${email}`)
       .then((res) => res.json())
       .then((result) => {
         if (result.accessToken) {

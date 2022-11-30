@@ -65,7 +65,7 @@ const AddPhone = () => {
           };
           // console.log(phone)
 
-          fetch("http://localhost:5000/addphone", {
+          fetch("https://phone-mela-server.vercel.app/addphone", {
             method: "POST", // or 'PUT'
             headers: {
               "Content-Type": "application/json",

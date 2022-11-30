@@ -3,7 +3,7 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const AllSeller = () => {
-  const url = "http://localhost:5000/allseller";
+  const url = "https://phone-mela-server.vercel.app/allseller";
   const { data: allSeller = [] } = useQuery({
     queryKey: ["allSeller"],
     queryFn: async () =>
@@ -16,7 +16,7 @@ const AllSeller = () => {
 
   const handleVerified = (id) => {
     // console.log(id);
-    fetch(`http://localhost:5000/allseller/${id}`, {
+    fetch(`https://phone-mela-server.vercel.app/allseller/${id}`, {
         method: 'PUT',
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -33,7 +33,7 @@ const AllSeller = () => {
 
   const handleDelete = (id)=>{
     console.log(id);
-    fetch(`http://localhost:5000/allseller/${id}`, {
+    fetch(`https://phone-mela-server.vercel.app/seller/${id}`, {
         method: 'DELETE',
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
