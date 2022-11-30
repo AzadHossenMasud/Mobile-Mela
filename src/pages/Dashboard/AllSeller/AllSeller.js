@@ -15,7 +15,7 @@ const AllSeller = () => {
   });
 
   const handleVerified = (id) => {
-    console.log(id);
+    // console.log(id);
     fetch(`http://localhost:5000/allseller/${id}`, {
         method: 'PUT',
         headers: {
@@ -30,6 +30,23 @@ const AllSeller = () => {
         }
       })
   };
+
+  const handleDelete = (id)=>{
+    console.log(id);
+    fetch(`http://localhost:5000/allseller/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => res.json())
+      .then(deleteresult => {
+        console.log(deleteresult)
+        // if(updateresult.modifiedCount){
+        //     toast.success('Seller verified successfully')
+        // }
+      })
+  }
   // console.log(allSeller);
   return (
     <div>
@@ -66,7 +83,7 @@ const AllSeller = () => {
                         }
                       
                     </td>
-                    <td>X</td>
+                    <td onClick={()=>handleDelete(seller._id)}> <button className=" font-semibold btn btn-sm bg-purple-800">X</button> </td>
                   </tr>
                 ))}
               </tbody>

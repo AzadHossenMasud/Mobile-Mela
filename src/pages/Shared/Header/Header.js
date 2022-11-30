@@ -39,6 +39,9 @@ const Header = () => {
           </li>
         </ul>
       </li>
+      <li>
+        <Link to="/blog">Blog</Link>
+      </li>
 
       {user?.email && (
         <>
