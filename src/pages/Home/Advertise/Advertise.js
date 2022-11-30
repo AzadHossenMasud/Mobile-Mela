@@ -13,7 +13,7 @@ const Advertise = () => {
       setAdvertiseItem([persons]);
     });
   }, []);
-  console.log(advertiseItem[0]);
+//   console.log(advertiseItem[0]);
   return <div>{advertiseItem?.length && <div className=" my-5">
   <h3 className=" text-2xl font-semibold text-purple-900 underline text-center">Only For You</h3>
   <div className="divider"></div>

@@ -4,13 +4,45 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const PhoneModal = ({ modalItem, setModalitem }) => {
-//   console.log(setModalitem);
+  // console.log(modalItem);
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const handleRegister = (data) => {
-    // console.log(data);
+
+    const bookPhone = {
+      buyerName: data.buyername,
+      buyerEmail: data.buyeremail,
+      buyerNumber: data.buyernumber,
+      buyerLocation: data.buyerlocation,
+      image: modalItem.image,
+      sellerName: modalItem.sellerName,
+      sellerNumber: modalItem.sellerNumber,
+      price: modalItem.price,
+      phoneId : modalItem._id,
+      phoneName: modalItem.phoneName
+
+    }
+
+    fetch("http://localhost:5000/bookingphone", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(bookPhone),
+    })
+      .then((response) => response.json())
+      .then( result => {
+        console.log(result)
+        if(result.acknowledged){
+          toast.success('You successfully booked the phone')
+
+        }
+        console.log(result)
+      })
+    // console.log(bookPhone);
     setModalitem('')
-    toast.success('You successfully booked the phone')
+    
   };
   return (
     <div>
