@@ -1,4 +1,17 @@
 # Resale Phone MERN Stack website
+
+## admin 
+adminEmail: admin@gmail.com
+
+adminPassword: 123456
+
+## seller
+email : azad@gmail.com
+password: 123456
+
+## buyer
+email: masud@gmail.com
+password : 123456
 ## Live Site: https://phone-mela-6a1c7.web.app/
 
 ## Project Description
