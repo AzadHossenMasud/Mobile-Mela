@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const MyPhones = () => {
@@ -37,7 +38,11 @@ const MyPhones = () => {
     })
       .then((response) => response.json())
       .then( result => {
-        console.log(result)
+        if(result.modifiedCount){
+          toast.success('This Item set for Advertisement')
+
+        }
+        // console.log(result)
       })
   }
   //   const { data: myPhones = [] } = useQuery({
