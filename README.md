@@ -1,3 +1,30 @@
+# Resale Phone MERN Stack website
+## Live Site: https://phone-mela-6a1c7.web.app/
+
+## Project Description
+
+* This Project have 3 part
+    * Admin 
+    * Buyer
+    * Seller
+## Feature
+* Single Page Website
+* Login system (google, email & password)
+* use jwt to secure request
+* Responsive website
+* Use MongoDB database to store data
+
+## Goal in future
+* add payment system
+* more functionality
+* use friendly
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
