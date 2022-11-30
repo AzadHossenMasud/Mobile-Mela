@@ -22,6 +22,24 @@ const MyPhones = () => {
       });
   }, []);
 
+  const handleAdvertise = (id)=>{
+    console.log(id);
+    const advertiseItem = {
+      phoneId: id
+    }
+    fetch("http://localhost:5000/advertise", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(advertiseItem),
+    })
+      .then((response) => response.json())
+      .then( result => {
+        console.log(result)
+      })
+  }
   //   const { data: myPhones = [] } = useQuery({
   //     queryKey: ["saveUser"],
   //     queryFn: async () =>
@@ -47,7 +65,9 @@ const MyPhones = () => {
                   <th>Phone Name</th>
                   <th>Catagory</th>
                   <th>Price</th>
+                  <th>Advertise</th>
                   <th>Status</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -57,6 +77,7 @@ const MyPhones = () => {
                     <td>{phone.phoneName}</td>
                     <td>{phone.catagory}</td>
                     <td>{phone.price}</td>
+                    <td onClick={()=>handleAdvertise(phone._id)}><button className=" btn btn-sm bg-purple-900">Advertise</button></td>
                     <td>{phone.status}</td>
                     
                   </tr> )
